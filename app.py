@@ -1,9 +1,16 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# Read the HTML file
-with open('index.html', 'r') as file:
+st.set_page_config(
+    page_title="AI DBA Assistant",
+    layout="wide"
+)
+
+with open("index.html", "r", encoding="utf-8") as file:
     html_content = file.read()
 
-# Render the HTML
-components.html(html_content, height=600)
+components.html(
+    html_content,
+    height=900,
+    scrolling=True
+)
