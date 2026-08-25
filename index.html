@@ -29,19 +29,46 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: Inter, system-ui, sans-serif; }
+    html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, sans-serif;
+}
 
     .stage {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background:
-        radial-gradient(ellipse 70% 50% at 12% 8%, rgba(14, 165, 233, 0.22), transparent 55%),
-        radial-gradient(ellipse 55% 45% at 90% 88%, rgba(6, 182, 212, 0.14), transparent 50%),
-        radial-gradient(ellipse 40% 30% at 70% 18%, rgba(59, 130, 246, 0.12), transparent 50%),
-        linear-gradient(180deg, #020817 0%, #041022 45%, #06152c 100%);
-    }
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse 70% 50% at 12% 8%,
+            rgba(14, 165, 233, 0.22),
+            transparent 55%
+        ),
+        radial-gradient(
+            ellipse 55% 45% at 90% 88%,
+            rgba(6, 182, 212, 0.14),
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse 40% 30% at 70% 18%,
+            rgba(59, 130, 246, 0.12),
+            transparent 50%
+        ),
+        linear-gradient(
+            180deg,
+            #020817 0%,
+            #041022 45%,
+            #06152c 100%
+        );
+}
 
     .stage::before {
       content: "";
