@@ -12,5 +12,4 @@ with open("index.html", "r", encoding="utf-8") as file:
 components.html(
     html_content,
     height=600,
-    scrolling=False
-)
+    scrolling=True)
