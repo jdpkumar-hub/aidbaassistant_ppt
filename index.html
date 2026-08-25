@@ -15,7 +15,7 @@
       --panel-strong: rgba(10, 28, 58, 0.88);
       --cyan: #22d3ee;
       --cyan-2: #67e8f9;
-      --blue: #38bdf8;
+      --blue: #1811f2; 
       --text: #f4faff;
       --muted: #9fb3c8;
       --dim: #6e849b;
@@ -30,45 +30,27 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: var(--bg);
-    color: var(--text);
-    font-family: Inter, system-ui, sans-serif;
-}
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden !important;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+    }
 
     .stage {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            ellipse 70% 50% at 12% 8%,
-            rgba(14, 165, 233, 0.22),
-            transparent 55%
-        ),
-        radial-gradient(
-            ellipse 55% 45% at 90% 88%,
-            rgba(6, 182, 212, 0.14),
-            transparent 50%
-        ),
-        radial-gradient(
-            ellipse 40% 30% at 70% 18%,
-            rgba(59, 130, 246, 0.12),
-            transparent 50%
-        ),
-        linear-gradient(
-            180deg,
-            #020817 0%,
-            #041022 45%,
-            #06152c 100%
-        );
-}
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden !important;
+      background:
+        radial-gradient(ellipse 70% 50% at 12% 8%, rgba(14, 165, 233, 0.22), transparent 55%),
+        radial-gradient(ellipse 55% 45% at 90% 88%, rgba(6, 182, 212, 0.14), transparent 50%),
+        radial-gradient(ellipse 40% 30% at 70% 18%, rgba(59, 130, 246, 0.12), transparent 50%),
+        linear-gradient(180deg, #020817 0%, #041022 45%, #06152c 100%);
+    }
 
     .stage::before {
       content: "";
@@ -128,13 +110,19 @@
       gap: 12px;
     }
     .brand-mark {
-      width: 38px; height: 38px;
-      border-radius: 10px;
-      background: radial-gradient(circle at 30% 30%, #67e8f9, #0369a1);
-      display: grid; place-items: center;
-      box-shadow: 0 0 18px rgba(34, 211, 238, 0.45);
+      height: 56px;
+      width: auto;
+      background: transparent;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
     }
-    .brand-mark svg { width: 24px; height: 24px; }
+    .brand-mark img {
+      height: 56px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
     .brand h1 { font-family: Outfit, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
     .brand p { font-size: 11px; color: var(--cyan); letter-spacing: 0.04em; text-transform: uppercase; }
 
@@ -152,16 +140,17 @@
       position: relative;
       z-index: 10;
       height: 100%;
-      padding: 72px 48px 78px;
+      padding: 58px 48px 58px;
+      box-sizing: border-box;
     }
 
     .slide {
       display: none;
       height: 100%;
       animation: rise 0.45s ease;
-      overflow: auto;
+      overflow: hidden;
     }
-    .slide.active { display: flex; flex-direction: column; }
+    .slide.active { display: flex; flex-direction: column; gap: 6px; }
     @keyframes rise {
       from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: none; }
@@ -169,21 +158,25 @@
 
     .kicker {
       display: flex; align-items: center; gap: 10px;
-      color: var(--cyan); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
-      margin-bottom: 8px;
+      color: var(--cyan); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700;
+      margin-bottom: 2px;
     }
     .kicker span {
       width: 28px; height: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
     }
     .slide h2 {
       font-family: Outfit, sans-serif;
-      font-size: clamp(28px, 3.2vw, 46px);
+      font-size: clamp(22px, 2.4vw, 34px);
       font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 8px;
+      line-height: 1.12;
+      margin-bottom: 4px;
     }
     .slide h2 em, .accent { color: var(--cyan-2); font-style: normal; }
-    .lede { color: var(--muted); font-size: 16px; max-width: 920px; margin-bottom: 22px; }
+    .lede { color: var(--muted); font-size: 14px; max-width: none; margin-bottom: 8px; }
+    .fill { flex: 1; min-height: 0; overflow: hidden; }
+    .grid.fill { align-content: stretch; min-height: 0; overflow: hidden; }
+    .grid.fill > * { min-height: 0; overflow: hidden; }
+    .cols-2eq { grid-template-columns: 1fr 1fr; }
 
     .glass {
       background: var(--panel);
@@ -193,19 +186,19 @@
       backdrop-filter: blur(14px);
     }
 
-    .grid { display: grid; gap: 14px; }
+    .grid { display: grid; gap: 10px; }
     .cols-2 { grid-template-columns: 1.1fr 0.9fr; }
     .cols-3 { grid-template-columns: repeat(3, 1fr); }
     .cols-4 { grid-template-columns: repeat(4, 1fr); }
     .cols-5 { grid-template-columns: repeat(5, 1fr); }
     .cols-6 { grid-template-columns: repeat(6, 1fr); }
 
-    .card { padding: 16px 18px; }
-    .card h3 { font-family: Outfit, sans-serif; font-size: 16px; margin-bottom: 10px; color: var(--cyan-2); }
-    .card ul, .bullets { list-style: none; display: grid; gap: 7px; }
+    .card { padding: 12px 14px; display: flex; flex-direction: column; }
+    .card h3 { font-family: Outfit, sans-serif; font-size: 15px; margin-bottom: 8px; color: var(--cyan-2); }
+    .card ul, .bullets { list-style: none; display: grid; gap: 5px; }
     .card li, .check {
       display: flex; align-items: flex-start; gap: 8px;
-      font-size: 14px; color: #dbe7f3; line-height: 1.4;
+      font-size: 13px; color: #dbe7f3; line-height: 1.35;
     }
     .dot {
       width: 8px; height: 8px; margin-top: 6px; border-radius: 50%;
@@ -241,8 +234,8 @@
     .warning { color: var(--amber); }
     .critical { color: var(--red); }
 
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid rgba(56,189,248,0.15); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid rgba(56,189,248,0.15); }
     th { color: var(--cyan); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
 
     .title-slide { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 28px; height: 100%; align-items: center; }
@@ -255,24 +248,23 @@
     .presenter span { color: var(--muted); font-size: 14px; }
 
     .hero-visual {
-    width: 100%;
-    height: 520px;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    box-shadow: 0 0 40px rgba(34, 211, 238, 0.18), var(--shadow);
-    position: relative;
-    background: #06101f;
-}
-    
+      width: 100%;
+      height: 420px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 0 40px rgba(34, 211, 238, 0.18), var(--shadow);
+      position: relative;
+      background: #06101f;
+    }
     .hero-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transform: none;
-}
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      transform: none;
+    }
     .hero-visual::before {
       content: "";
       position: absolute;
@@ -331,18 +323,20 @@
     .step-card span { color: var(--muted); font-size: 12px; }
 
     .chat {
-      padding: 16px; display: grid; gap: 12px;
+      padding: 12px; display: grid; gap: 8px; min-height: 0; overflow: hidden;
     }
-    .bubble { max-width: 92%; padding: 12px 14px; border-radius: 14px; font-size: 14px; line-height: 1.45; }
+    .bubble { max-width: 92%; padding: 10px 12px; border-radius: 14px; font-size: 13px; line-height: 1.4; }
     .q { background: rgba(56,189,248,0.12); border: 1px solid var(--line); }
     .a { background: rgba(16,185,129,0.1); border: 1px solid rgba(52,211,153,0.3); margin-left: auto; }
 
     .goal {
-      margin-top: auto;
-      padding: 14px 16px;
+      margin-top: 0;
+      padding: 10px 14px;
       border-left: 3px solid var(--cyan);
       background: linear-gradient(90deg, rgba(34,211,238,0.12), transparent);
     }
+    .quote { font-family: Outfit, sans-serif; font-size: 16px; line-height: 1.35; color: #eaf6ff; }
+    .kpi { text-align: center; padding: 8px 6px; }
     .goal b { color: var(--cyan-2); }
 
     .nav {
@@ -387,7 +381,7 @@
     }
 
     .quote {
-      font-family: Outfit, sans-serif; font-size: 22px; line-height: 1.4; color: #eaf6ff;
+      font-family: Outfit, sans-serif; font-size: 16px; line-height: 1.35; color: #eaf6ff;
     }
     .features {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; max-width: 520px;
@@ -398,15 +392,32 @@
     }
     .rpt p { font-size: 14px; color: #dbe7f3; }
 
-    .timeline { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 8px; margin: 10px 0 18px; }
-    .tl { text-align: center; padding: 12px; }
+    .awr-shot {
+      margin-top: 8px;
+      flex: 1;
+      min-height: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #f4f7fb;
+    }
+    .awr-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      display: block;
+    }
+
+    .timeline { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 8px; margin: 4px 0 8px; }
+    .tl { text-align: center; padding: 8px; }
     .tl b { display: block; color: var(--cyan-2); }
 
     @media (max-width: 1100px) {
-      .title-slide, .cols-2, .compare, .arch { grid-template-columns: 1fr; }
+      .title-slide, .cols-2, .cols-2eq, .compare, .arch { grid-template-columns: 1fr; }
       .cols-4, .cols-5, .cols-6 { grid-template-columns: repeat(2, 1fr); }
-      .deck { padding: 70px 20px 80px; }
-      .hero-visual { height: 280px; }
+      .deck { padding: 56px 20px 56px; }
+      .hero-visual { height: 300px; }
     }
 
     @media print {
@@ -423,23 +434,19 @@
 
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#03111f" stroke-width="1.8">
-            <ellipse cx="12" cy="7" rx="7" ry="3"/>
-            <path d="M5 7v10c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/>
-            <path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>
-          </svg>
+        <div class="brand-mark">
+          <img src="assets/logo.png" alt="AI DBA Assistant" />
         </div>
         <div>
           <h1>AI DBA Assistant</h1>
           <p>Intelligent Database Performance Platform</p>
         </div>
       </div>
-      <div class="chip" id="slideChip">01 / 28</div>
+      <div class="chip" id="slideChip">01 / 14</div>
     </header>
 
     <main class="deck" id="deck">
-      <!-- 1 -->
+      <!-- 1 Title -->
       <section class="slide active" data-title="Title">
         <div class="title-slide">
           <div class="hero-copy">
@@ -467,21 +474,21 @@
           </div>
           <div>
             <div class="hero-visual">
-              <img src="assets/banner.png" alt="AI DBA Assistant platform visual" />
+              <img src="assets/logo.jpg" alt="AI DBA Assistant platform visual" />
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 2 -->
-      <section class="slide" data-title="What Is AI DBA Assistant?">
+      <!-- 2 What is + Capabilities -->
+      <section class="slide" data-title="What Is AI DBA Assistant">
         <div class="kicker"><span></span> Slide 02 · Product Overview</div>
         <h2>What Is <em>AI DBA Assistant</em>?</h2>
         <p class="lede">An intelligent Oracle database performance analysis platform designed to help DBAs move from raw AWR data to diagnosis, recommendation, and action.</p>
-        <div class="grid cols-2" style="flex:1;">
+        <div class="grid cols-2eq fill">
           <div class="glass card">
             <h3>The platform helps DBAs</h3>
-            <ul class="cols-2" style="display:grid; grid-template-columns:1fr 1fr; gap:8px 16px;">
+            <ul class="grid cols-2eq">
               <li class="check">Analyze Oracle AWR reports</li>
               <li class="check">Identify database health issues</li>
               <li class="check">Detect performance bottlenecks</li>
@@ -493,22 +500,48 @@
               <li class="check">Prioritize DBA actions</li>
               <li class="check">Produce executive-level reports</li>
             </ul>
+            <div class="goal" style="margin-top:10px;"><b>Goal:</b> Reduce the time required to move from raw database performance data → diagnosis → recommendation → action.</div>
+            <figure class="awr-shot">
+              <img src="assets/awr-report.png" alt="Sample Oracle AWR Workload Repository report" />
+            </figure>
           </div>
-          <div class="glass card" style="display:flex; flex-direction:column; justify-content:center;">
-            <h3>Goal</h3>
-            <p class="quote">Reduce the time required to move from raw database performance data → diagnosis → recommendation → action.</p>
+          <div class="grid" style="grid-template-rows:1fr 1fr 1fr; gap:10px;">
+            <div class="glass card">
+              <h3>Performance Analysis</h3>
+              <ul>
+                <li class="check">AWR analysis · health assessment · performance scoring</li>
+                <li class="check">Bottleneck detection · wait-event analysis</li>
+                <li class="check">CPU, I/O, and memory analysis</li>
+              </ul>
+            </div>
+            <div class="glass card">
+              <h3>SQL Intelligence</h3>
+              <ul>
+                <li class="check">Top SQL identification · SQL performance analysis</li>
+                <li class="check">SQL tuning recommendations · SQL statistics</li>
+                <li class="check">SQL impact analysis · recommended indexes</li>
+              </ul>
+            </div>
+            <div class="glass card">
+              <h3>Reporting</h3>
+              <ul>
+                <li class="check">Executive dashboard · DBA performance report</li>
+                <li class="check">SQL tuning report · PDF export</li>
+                <li class="check">AI findings · recommendations</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 3 -->
-      <section class="slide" data-title="The Problem">
-        <div class="kicker"><span></span> Slide 03 · The Problem</div>
-        <h2>Traditional <em>AWR Analysis</em></h2>
-        <p class="lede">AWR contains a tremendous amount of information. It tells us what happened. The DBA still has to determine why it happened and what to do next.</p>
-        <div class="grid cols-2" style="flex:1;">
+      <!-- 3 Problem + Approach -->
+      <section class="slide" data-title="The Problem and Approach">
+        <div class="kicker"><span></span> Slide 03 · Problem &amp; Approach</div>
+        <h2>Traditional AWR vs the <em>AI DBA Approach</em></h2>
+        <p class="lede">AWR tells us WHAT happened. The DBA still has to determine WHY it happened and WHAT to do next. AI assists the DBA — it does not replace the DBA.</p>
+        <div class="grid cols-2eq fill">
           <div class="glass card">
-            <h3>AWR contains</h3>
+            <h3>AWR contains a tremendous amount of information</h3>
             <div class="wrap">
               <span class="pill">Load Profile</span><span class="pill">Instance Efficiency</span>
               <span class="pill">Top 10 Foreground Events</span><span class="pill">SQL Statistics</span>
@@ -517,10 +550,8 @@
               <span class="pill">RAC Information</span><span class="pill">Segment Statistics</span>
               <span class="pill">Database Activity</span>
             </div>
-          </div>
-          <div class="glass card">
-            <h3>Common DBA challenges</h3>
-            <ul>
+            <h3 style="margin-top:12px;">Common DBA challenges</h3>
+            <ul class="grid cols-2eq">
               <li class="check">Large AWR reports</li>
               <li class="check">Manual investigation</li>
               <li class="check">Multiple sections to correlate</li>
@@ -530,60 +561,52 @@
               <li class="check">Expertise required to interpret results</li>
             </ul>
           </div>
-        </div>
-      </section>
-
-      <!-- 4 -->
-      <section class="slide" data-title="The AI DBA Approach">
-        <div class="kicker"><span></span> Slide 04 · Approach</div>
-        <h2>The AI DBA <em>Approach</em></h2>
-        <p class="lede">The objective is not to replace the DBA. AI assists the DBA as an intelligent performance investigation assistant.</p>
-        <div class="compare">
-          <div class="glass card old">
+          <div class="glass card">
             <h3>Traditional DBA workflow</h3>
-            <div class="flow">
+            <div class="flow old">
               <div class="step">AWR Report</div><div class="arrow">→</div>
               <div class="step">Manual Review</div><div class="arrow">→</div>
               <div class="step">Correlation</div><div class="arrow">→</div>
               <div class="step">Diagnosis</div>
             </div>
-            <div class="flow" style="margin-top:8px;">
+            <div class="flow old" style="margin-top:8px;">
               <div class="step">SQL Investigation</div><div class="arrow">→</div>
               <div class="step">Recommendation</div><div class="arrow">→</div>
               <div class="step">Report</div>
             </div>
-          </div>
-          <div class="glass card neu">
-            <h3>AI DBA Assistant</h3>
-            <div class="flow">
+            <h3 style="margin-top:14px;">AI DBA Assistant</h3>
+            <div class="flow neu">
               <div class="step">AWR Report</div><div class="arrow">→</div>
               <div class="step">AI Analysis</div><div class="arrow">→</div>
               <div class="step">Findings</div>
             </div>
-            <div class="flow" style="margin-top:8px;">
+            <div class="flow neu" style="margin-top:8px;">
               <div class="step">Root Cause Indicators</div><div class="arrow">→</div>
               <div class="step">Recommendations</div><div class="arrow">→</div>
               <div class="step">DBA Action</div>
             </div>
+            <div class="goal" style="margin-top:12px;"><b>Guiding principle:</b> It acts as an intelligent performance investigation assistant. AI assists the DBA.</div>
           </div>
         </div>
-        <div class="goal" style="margin-top:18px;"><b>Guiding principle:</b> AI assists the DBA. It does not replace experience, judgment, or production knowledge.</div>
       </section>
 
-      <!-- 5 -->
-      <section class="slide" data-title="Product Architecture">
-        <div class="kicker"><span></span> Slide 05 · Architecture</div>
-        <h2>Product <em>Architecture</em></h2>
-        <div class="arch" style="flex:1; margin-top:8px;">
+      <!-- 4 Architecture + AWR Analyzer -->
+      <section class="slide" data-title="Architecture and AWR Analyzer">
+        <div class="kicker"><span></span> Slide 04 · Architecture</div>
+        <h2>Product Architecture &amp; <em>AWR Analyzer</em></h2>
+        <p class="lede">Upload an Oracle AWR HTML report and let the platform automatically analyze the database.</p>
+        <div class="arch fill">
           <div class="vflow">
             <div class="glass card"><h3>User / DBA</h3></div>
             <div class="glass card"><h3>Web Application</h3></div>
             <div class="glass card"><h3>AWR Analysis API</h3></div>
             <div class="glass card"><h3>AWR Parser</h3></div>
+            <div class="glass card"><h3>AI Recommendation Layer</h3></div>
+            <div class="glass card"><h3>Dashboard + Reports</h3></div>
           </div>
           <div class="glass card">
             <h3>Performance Analysis Engines</h3>
-            <div class="engines">
+            <div class="engines" style="margin-bottom:12px;">
               <div class="pill">Health Score Engine</div>
               <div class="pill">Bottleneck Engine</div>
               <div class="pill">Wait Event Analysis</div>
@@ -591,7 +614,17 @@
               <div class="pill">Rules Engine</div>
               <div class="pill">Executive Summary Engine</div>
             </div>
-            <div class="goal" style="margin-top:16px;"><b>Then</b> AI Recommendation Layer → Dashboard + Reports + Recommendations</div>
+            <h3>Processing</h3>
+            <ul class="grid cols-2eq">
+              <li class="check">Parse AWR sections</li>
+              <li class="check">Extract performance metrics</li>
+              <li class="check">Analyze database workload</li>
+              <li class="check">Detect abnormal conditions</li>
+              <li class="check">Identify bottlenecks</li>
+              <li class="check">Analyze SQL</li>
+              <li class="check">Generate recommendations</li>
+            </ul>
+            <div class="goal" style="margin-top:12px;"><b>Input:</b> Oracle AWR HTML Report &nbsp;·&nbsp; <b>Output:</b> Database Performance Intelligence</div>
           </div>
           <div class="glass card">
             <h3>Technology stack</h3>
@@ -605,89 +638,16 @@
         </div>
       </section>
 
-      <!-- 6 -->
-      <section class="slide" data-title="Main Product Capabilities">
-        <div class="kicker"><span></span> Slide 06 · Capabilities</div>
-        <h2>Main Product <em>Capabilities</em></h2>
-        <div class="grid cols-3" style="flex:1;">
-          <div class="glass card">
-            <h3>Performance Analysis</h3>
-            <ul>
-              <li class="check">AWR analysis</li>
-              <li class="check">Database health assessment</li>
-              <li class="check">Performance scoring</li>
-              <li class="check">Bottleneck detection</li>
-              <li class="check">Wait-event analysis</li>
-              <li class="check">CPU, I/O, and memory analysis</li>
-            </ul>
-          </div>
-          <div class="glass card">
-            <h3>SQL Intelligence</h3>
-            <ul>
-              <li class="check">Top SQL identification</li>
-              <li class="check">SQL performance analysis</li>
-              <li class="check">SQL tuning recommendations</li>
-              <li class="check">SQL statistics</li>
-              <li class="check">SQL impact analysis</li>
-              <li class="check">Recommended indexes</li>
-            </ul>
-          </div>
-          <div class="glass card">
-            <h3>Reporting</h3>
-            <ul>
-              <li class="check">Executive dashboard</li>
-              <li class="check">DBA performance report</li>
-              <li class="check">SQL tuning report</li>
-              <li class="check">PDF export</li>
-              <li class="check">AI findings</li>
-              <li class="check">Recommendations</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7 -->
-      <section class="slide" data-title="AWR Analyzer">
-        <div class="kicker"><span></span> Slide 07 · AWR Analyzer</div>
-        <h2>AWR <em>Analyzer</em></h2>
-        <p class="lede">Upload an Oracle AWR report and let the platform automatically analyze the database.</p>
-        <div class="grid cols-3" style="flex:1;">
-          <div class="glass card">
-            <h3>Input</h3>
-            <p class="quote" style="font-size:20px;">Oracle AWR HTML Report</p>
-          </div>
-          <div class="glass card">
-            <h3>Processing</h3>
-            <ul>
-              <li class="check">Parse AWR sections</li>
-              <li class="check">Extract performance metrics</li>
-              <li class="check">Analyze database workload</li>
-              <li class="check">Detect abnormal conditions</li>
-              <li class="check">Identify bottlenecks</li>
-              <li class="check">Analyze SQL</li>
-              <li class="check">Generate recommendations</li>
-            </ul>
-          </div>
-          <div class="glass card">
-            <h3>Output</h3>
-            <p class="quote" style="font-size:20px;">Database Performance Intelligence</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 8 -->
-      <section class="slide" data-title="Database Health Score">
-        <div class="kicker"><span></span> Slide 08 · Health Score</div>
-        <h2>Database <em>Health Score</em></h2>
-        <p class="lede">Instead of reading hundreds of pages first, the DBA gets an immediate high-level assessment.</p>
-        <div class="grid cols-2" style="flex:1;">
-          <div class="glass card" style="display:grid; place-items:center;">
+      <!-- 5 Health Score + Dashboard -->
+      <section class="slide" data-title="Health Score and Dashboard">
+        <div class="kicker"><span></span> Slide 05 · Health &amp; Dashboard</div>
+        <h2>Database Health Score &amp; <em>Executive Dashboard</em></h2>
+        <p class="lede">Instead of reading hundreds of pages first, the DBA gets an immediate high-level assessment and a quick view of database performance.</p>
+        <div class="grid cols-2 fill">
+          <div class="glass card" style="align-items:center; text-align:center;">
             <small style="color:var(--cyan); letter-spacing:.12em; text-transform:uppercase;">Overall Health Score</small>
-            <div class="gauge" style="width:160px;height:160px;margin:16px auto;"><span style="width:120px;height:120px;font-size:32px;">78</span></div>
-            <p style="color:var(--muted);">78 / 100 · Start with the weakest areas first</p>
-          </div>
-          <div class="glass card">
-            <h3>Break the score into areas</h3>
+            <div class="gauge" style="width:96px;height:96px;margin:6px auto;"><span style="width:72px;height:72px;font-size:22px;">78</span></div>
+            <p style="color:var(--muted); margin-bottom:6px; font-size:13px;">78 / 100 · Start with the weakest areas first</p>
             <table>
               <thead><tr><th>Area</th><th>Status</th></tr></thead>
               <tbody>
@@ -699,172 +659,135 @@
                 <tr><td>Database Load</td><td class="status warning">Warning</td></tr>
               </tbody>
             </table>
-            <div class="goal" style="margin-top:14px;"><b>Why this matters:</b> the DBA immediately knows where to start.</div>
+            <div class="goal" style="margin-top:8px; width:100%; text-align:left;"><b>Why this matters:</b> the DBA immediately knows where to start.</div>
+          </div>
+          <div class="grid" style="grid-template-rows:auto auto 1fr; gap:10px;">
+            <div class="grid cols-5">
+              <div class="glass kpi"><b>DB Time</b><span>Workload consumed</span></div>
+              <div class="glass kpi"><b>DB CPU</b><span>Processor demand</span></div>
+              <div class="glass kpi"><b>AAS</b><span>Average Active Sessions</span></div>
+              <div class="glass kpi"><b>CPU Util</b><span>Host saturation</span></div>
+              <div class="glass kpi"><b>I/O Util</b><span>Storage pressure</span></div>
+            </div>
+            <div class="grid cols-5">
+              <div class="glass kpi"><b>Logical Reads</b><span>Buffer cache activity</span></div>
+              <div class="glass kpi"><b>Physical Reads</b><span>Disk I/O</span></div>
+              <div class="glass kpi"><b>Transactions</b><span>Commit rate</span></div>
+              <div class="glass kpi"><b>Executions</b><span>SQL throughput</span></div>
+              <div class="glass kpi"><b>User Calls</b><span>Application demand</span></div>
+            </div>
+            <div class="glass card">
+              <h3>Performance trend</h3>
+              <p class="lede">Visualize CPU vs I/O, DB Time, AAS, and Wait Events.</p>
+              <div class="wrap"><span class="pill">CPU vs I/O</span><span class="pill">DB Time</span><span class="pill">AAS</span><span class="pill">Wait Events</span></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 9 -->
-      <section class="slide" data-title="Executive Dashboard">
-        <div class="kicker"><span></span> Slide 09 · Executive Dashboard</div>
-        <h2>AWR Executive <em>Dashboard</em></h2>
-        <p class="lede">A quick view of database performance — KPIs first, then trends that show where pressure is building.</p>
-        <div class="grid cols-5">
-          <div class="glass kpi"><b>DB Time</b><span>Workload consumed</span></div>
-          <div class="glass kpi"><b>DB CPU</b><span>Processor demand</span></div>
-          <div class="glass kpi"><b>AAS</b><span>Average Active Sessions</span></div>
-          <div class="glass kpi"><b>CPU Util</b><span>Host saturation</span></div>
-          <div class="glass kpi"><b>I/O Util</b><span>Storage pressure</span></div>
-        </div>
-        <div class="grid cols-5" style="margin-top:12px;">
-          <div class="glass kpi"><b>Logical Reads</b><span>Buffer cache activity</span></div>
-          <div class="glass kpi"><b>Physical Reads</b><span>Disk I/O</span></div>
-          <div class="glass kpi"><b>Transactions</b><span>Commit rate</span></div>
-          <div class="glass kpi"><b>Executions</b><span>SQL throughput</span></div>
-          <div class="glass kpi"><b>User Calls</b><span>Application demand</span></div>
-        </div>
-        <div class="glass card" style="margin-top:14px;">
-          <h3>Performance trend</h3>
-          <div class="wrap"><span class="pill">CPU vs I/O</span><span class="pill">DB Time</span><span class="pill">AAS</span><span class="pill">Wait Events</span></div>
-        </div>
-      </section>
-
-      <!-- 10 -->
-      <section class="slide" data-title="Bottleneck Detection">
-        <div class="kicker"><span></span> Slide 10 · Bottlenecks</div>
-        <h2>Intelligent <em>Bottleneck Analysis</em></h2>
-        <p class="lede">AI DBA Assistant analyzes database workload and identifies the major sources of performance pressure.</p>
-        <div class="grid cols-3" style="flex:1;">
-          <div class="glass card">
-            <h3 class="critical">Primary bottleneck · I/O</h3>
-            <ul>
-              <li class="check">High physical reads</li>
-              <li class="check">Increased I/O wait time</li>
-              <li class="check">High read latency</li>
-              <li class="check">Elevated user I/O waits</li>
-            </ul>
+      <!-- 6 Bottlenecks + Wait Events -->
+      <section class="slide" data-title="Bottlenecks and Wait Events">
+        <div class="kicker"><span></span> Slide 06 · Bottlenecks &amp; Waits</div>
+        <h2>Bottleneck Detection &amp; <em>Wait Event Intelligence</em></h2>
+        <p class="lede">Analyze workload to identify the major sources of performance pressure, then categorize wait events and explain what they may mean.</p>
+        <div class="grid cols-2eq fill">
+          <div class="grid" style="grid-template-rows:1fr 1fr 1fr; gap:10px;">
+            <div class="glass card">
+              <h3 class="critical">Primary bottleneck · I/O</h3>
+              <ul>
+                <li class="check">High physical reads · Increased I/O wait time</li>
+                <li class="check">High read latency · Elevated user I/O waits</li>
+              </ul>
+            </div>
+            <div class="glass card">
+              <h3 class="warning">Secondary bottleneck · SQL</h3>
+              <ul>
+                <li class="check">High DB Time SQL · Excessive logical reads</li>
+                <li class="check">Inefficient execution</li>
+              </ul>
+            </div>
+            <div class="glass card">
+              <h3>Result</h3>
+              <p>Instead of giving the DBA 50 possible problems, focus on the 2–3 problems most likely to have the greatest impact.</p>
+            </div>
           </div>
           <div class="glass card">
-            <h3 class="warning">Secondary bottleneck · SQL</h3>
-            <ul>
-              <li class="check">High DB Time SQL</li>
-              <li class="check">Excessive logical reads</li>
-              <li class="check">Inefficient execution</li>
-            </ul>
-          </div>
-          <div class="glass card">
-            <h3>Result</h3>
-            <p class="quote" style="font-size:20px;">Instead of 50 possible problems, focus on the 2–3 issues most likely to have the greatest impact.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 11 -->
-      <section class="slide" data-title="Wait Event Analysis">
-        <div class="kicker"><span></span> Slide 11 · Wait Events</div>
-        <h2>Wait Event <em>Intelligence</em></h2>
-        <p class="lede">The tool analyzes Oracle wait events and categorizes performance issues — then explains what they may mean.</p>
-        <div class="wrap" style="margin-bottom:14px;">
-          <span class="pill">db file sequential read</span>
-          <span class="pill">db file scattered read</span>
-          <span class="pill">direct path read</span>
-          <span class="pill">log file sync</span>
-          <span class="pill">log file parallel write</span>
-          <span class="pill">enq: TX</span>
-          <span class="pill">CPU time</span>
-          <span class="pill">User I/O</span>
-          <span class="pill">Concurrency</span>
-          <span class="pill">Commit</span>
-        </div>
-        <div class="grid cols-2" style="flex:1;">
-          <div class="glass card">
-            <h3>Typical output</h3>
-            <p style="font-size:18px; margin-top:12px;"><code style="color:var(--cyan-2);">db file sequential read — 35%</code></p>
-            <p style="color:var(--muted); margin-top:8px;">Useful, but incomplete on its own.</p>
-          </div>
-          <div class="glass card">
-            <h3>AI interpretation</h3>
+            <h3>Wait events analyzed</h3>
+            <div class="wrap" style="margin-bottom:12px;">
+              <span class="pill">db file sequential read</span>
+              <span class="pill">db file scattered read</span>
+              <span class="pill">direct path read</span>
+              <span class="pill">log file sync</span>
+              <span class="pill">log file parallel write</span>
+              <span class="pill">enq: TX</span>
+              <span class="pill">CPU time</span>
+              <span class="pill">User I/O</span>
+              <span class="pill">Concurrency</span>
+              <span class="pill">Commit</span>
+            </div>
+            <h3>Typical output vs AI interpretation</h3>
+            <p style="margin:8px 0;"><code style="color:var(--cyan-2);">db file sequential read — 35%</code></p>
             <p>High single-block read activity may indicate significant index/table access and could warrant investigation of SQL execution plans, indexing, and storage latency.</p>
           </div>
         </div>
       </section>
 
-      <!-- 12 -->
-      <section class="slide" data-title="Top SQL Analysis">
-        <div class="kicker"><span></span> Slide 12 · Top SQL</div>
-        <h2>Top SQL <em>Performance Analysis</em></h2>
-        <p class="lede">Identify SQL statements contributing most to database workload.</p>
-        <div class="grid cols-5" style="margin-bottom:14px;">
+      <!-- 7 Top SQL + SQL Tuning -->
+      <section class="slide" data-title="Top SQL and Tuning">
+        <div class="kicker"><span></span> Slide 07 · SQL Intelligence</div>
+        <h2>Top SQL Analysis &amp; <em>SQL Tuning Assistant</em></h2>
+        <p class="lede">Identify SQL contributing most to workload, then explain the problem, evidence, possible cause, and recommended next steps.</p>
+        <div class="grid cols-5">
           <div class="glass kpi"><b>SQL ID</b><span>Identity</span></div>
           <div class="glass kpi"><b>SQL Text</b><span>Statement</span></div>
           <div class="glass kpi"><b>Executions</b><span>Frequency</span></div>
           <div class="glass kpi"><b>Elapsed / CPU</b><span>Time consumed</span></div>
           <div class="glass kpi"><b>DB Time</b><span>Impact</span></div>
         </div>
-        <div class="grid cols-5" style="margin-bottom:14px;">
+        <div class="grid cols-5">
           <div class="glass kpi"><b>Buffer Gets</b><span>Logical I/O</span></div>
           <div class="glass kpi"><b>Disk Reads</b><span>Physical I/O</span></div>
           <div class="glass kpi"><b>Rows Processed</b><span>Work done</span></div>
           <div class="glass kpi"><b>Avg Elapsed</b><span>Per execution</span></div>
           <div class="glass kpi"><b>Impact Rank</b><span>Priority</span></div>
         </div>
-        <div class="glass card">
-          <h3>Automatically identify</h3>
-          <div class="wrap">
-            <span class="pill">High-impact SQL</span>
-            <span class="pill">Expensive SQL</span>
-            <span class="pill">Frequently executed SQL</span>
-            <span class="pill">High I/O SQL</span>
-          </div>
+        <div class="wrap">
+          <span class="pill">High-impact SQL</span>
+          <span class="pill">Expensive SQL</span>
+          <span class="pill">Frequently executed SQL</span>
+          <span class="pill">High I/O SQL</span>
         </div>
-      </section>
-
-      <!-- 13 -->
-      <section class="slide" data-title="SQL Tuning Assistant">
-        <div class="kicker"><span></span> Slide 13 · SQL Tuning</div>
-        <h2>SQL Tuning <em>Intelligence</em></h2>
-        <p class="lede">For important SQL statements, the assistant explains the problem, the evidence, possible causes, and recommended next steps.</p>
-        <div class="grid cols-4" style="flex:1;">
+        <div class="grid cols-4 fill">
           <div class="glass card"><h3>Problem</h3><p>What makes this SQL expensive?</p></div>
           <div class="glass card"><h3>Evidence</h3><p>Which metrics indicate the problem?</p></div>
           <div class="glass card">
             <h3>Possible cause</h3>
             <ul>
-              <li class="check">Missing index</li>
-              <li class="check">Excessive logical reads</li>
-              <li class="check">Full table scan</li>
-              <li class="check">Poor selectivity</li>
+              <li class="check">Missing index · Excessive logical reads</li>
+              <li class="check">Full table scan · Poor selectivity</li>
               <li class="check">High execution frequency</li>
-              <li class="check">Inefficient join</li>
-              <li class="check">Plan instability</li>
+              <li class="check">Inefficient join · Plan instability</li>
             </ul>
           </div>
           <div class="glass card"><h3>Recommendation</h3><p>Potential tuning actions for DBA review — not automatic production changes.</p></div>
         </div>
       </section>
 
-      <!-- 14 -->
-      <section class="slide" data-title="Recommended Indexes">
-        <div class="kicker"><span></span> Slide 14 · Indexes</div>
-        <h2>Index <em>Recommendation</em></h2>
-        <p class="lede">AI DBA Assistant can identify SQL patterns that may benefit from indexing. Recommendations are advisory.</p>
-        <div class="grid cols-3" style="flex:1;">
+      <!-- 8 Indexes + AI Findings -->
+      <section class="slide" data-title="Indexes and AI Findings">
+        <div class="kicker"><span></span> Slide 08 · Indexes &amp; Findings</div>
+        <h2>Index Recommendations &amp; <em>AI-Powered Findings</em></h2>
+        <p class="lede">The system converts raw performance metrics into understandable findings. Index recommendations are advisory.</p>
+        <div class="grid cols-2eq fill">
           <div class="glass card">
             <h3>Example · SQL ID abc123xyz</h3>
             <ul>
-              <li class="check">High logical reads</li>
-              <li class="check">High elapsed time</li>
-              <li class="check">Large table access</li>
-              <li class="check">Frequent execution</li>
+              <li class="check">High logical reads · High elapsed time</li>
+              <li class="check">Large table access · Frequent execution</li>
             </ul>
-          </div>
-          <div class="glass card">
-            <h3>Recommendation</h3>
-            <p>Evaluate whether an index on the frequently filtered or joined columns could reduce unnecessary data access.</p>
-          </div>
-          <div class="glass card">
+            <p style="margin:10px 0;">Evaluate whether an index on the frequently filtered or joined columns could reduce unnecessary data access.</p>
             <h3>DBA must validate</h3>
-            <ul>
+            <ul class="grid cols-2eq">
               <li class="check">Data distribution</li>
               <li class="check">Existing indexes</li>
               <li class="check">DML impact</li>
@@ -873,46 +796,31 @@
               <li class="check">Production workload</li>
             </ul>
           </div>
-        </div>
-      </section>
-
-      <!-- 15 -->
-      <section class="slide" data-title="AI Findings">
-        <div class="kicker"><span></span> Slide 15 · AI Findings</div>
-        <h2>AI-Powered <em>Findings</em></h2>
-        <p class="lede">The system converts raw performance metrics into understandable findings.</p>
-        <div class="glass card" style="flex:1;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <h3>Finding #1 — High I/O Pressure</h3>
-            <span class="status critical">Severity: Critical</span>
-          </div>
-          <div class="grid cols-3">
-            <div>
-              <h3>Evidence</h3>
-              <ul>
-                <li class="check">High physical reads</li>
-                <li class="check">Elevated I/O wait time</li>
-                <li class="check">High-impact SQL contributing to disk activity</li>
-              </ul>
+          <div class="glass card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <h3>Finding #1 — High I/O Pressure</h3>
+              <span class="status critical">Severity: Critical</span>
             </div>
-            <div>
-              <h3>Potential cause</h3>
-              <p>Inefficient data access patterns.</p>
-            </div>
-            <div>
-              <h3>Recommended action</h3>
-              <p>Investigate top I/O-consuming SQL and execution plans.</p>
-            </div>
+            <h3>Evidence</h3>
+            <ul>
+              <li class="check">High physical reads</li>
+              <li class="check">Elevated I/O wait time</li>
+              <li class="check">High-impact SQL contributing to disk activity</li>
+            </ul>
+            <h3 style="margin-top:10px;">Potential cause</h3>
+            <p>Inefficient data access patterns.</p>
+            <h3 style="margin-top:10px;">Recommended action</h3>
+            <p>Investigate top I/O-consuming SQL and execution plans.</p>
           </div>
         </div>
       </section>
 
-      <!-- 16 -->
-      <section class="slide" data-title="DBA Recommendations">
-        <div class="kicker"><span></span> Slide 16 · Recommendations</div>
-        <h2>From Findings → <em>Actions</em></h2>
-        <p class="lede">Instead of simply saying “Performance issue detected,” the assistant walks the DBA from finding to a validated action.</p>
-        <div class="flow" style="margin-top:12px;">
+      <!-- 9 Recommendations + Reports -->
+      <section class="slide" data-title="Recommendations and Reports">
+        <div class="kicker"><span></span> Slide 09 · Actions &amp; Reports</div>
+        <h2>From Findings → Actions &amp; <em>Performance Report</em></h2>
+        <p class="lede">Instead of simply saying “Performance issue detected,” the assistant walks the DBA from finding to a validated action — then produces a structured report for DBAs and management.</p>
+        <div class="flow">
           <div class="glass step">Finding<br/><small>High DB Time</small></div>
           <div class="arrow">→</div>
           <div class="glass step">Evidence<br/><small>Top SQL contributes significant DB Time</small></div>
@@ -923,13 +831,7 @@
           <div class="arrow">→</div>
           <div class="glass step">DBA Action<br/><small>Validate before production</small></div>
         </div>
-      </section>
-
-      <!-- 17 -->
-      <section class="slide" data-title="Automated Report Generation">
-        <div class="kicker"><span></span> Slide 17 · Reports</div>
-        <h2>Professional <em>Performance Report</em></h2>
-        <div class="grid cols-4" style="flex:1;">
+        <div class="grid cols-4 fill">
           <div class="glass card">
             <h3>Executive summary</h3>
             <ul>
@@ -941,9 +843,7 @@
           <div class="glass card">
             <h3>Performance analysis</h3>
             <ul>
-              <li class="check">CPU</li>
-              <li class="check">Memory</li>
-              <li class="check">I/O</li>
+              <li class="check">CPU · Memory · I/O</li>
               <li class="check">Wait events</li>
               <li class="check">Database load</li>
             </ul>
@@ -959,21 +859,13 @@
           <div class="glass card">
             <h3>DBA recommendations</h3>
             <ul>
-              <li class="check">Priority</li>
-              <li class="check">Finding</li>
+              <li class="check">Priority · Finding</li>
               <li class="check">Evidence</li>
               <li class="check">Suggested action</li>
             </ul>
-            <div class="goal" style="margin-top:12px;"><b>Export:</b> PDF Performance Report</div>
+            <div class="goal" style="margin-top:8px;"><b>Export:</b> PDF Performance Report</div>
           </div>
         </div>
-      </section>
-
-      <!-- 18 -->
-      <section class="slide" data-title="Report Structure">
-        <div class="kicker"><span></span> Slide 18 · Report Structure</div>
-        <h2>AI DBA <em>Performance Report</em></h2>
-        <p class="lede">The same analysis can be consumed by both DBAs and management.</p>
         <div class="grid cols-5">
           <div class="glass card rpt"><b>01</b><p>Executive Summary</p></div>
           <div class="glass card rpt"><b>02</b><p>Database Health Score</p></div>
@@ -981,7 +873,7 @@
           <div class="glass card rpt"><b>04</b><p>Bottleneck Analysis</p></div>
           <div class="glass card rpt"><b>05</b><p>Wait Event Analysis</p></div>
         </div>
-        <div class="grid cols-5" style="margin-top:12px;">
+        <div class="grid cols-5">
           <div class="glass card rpt"><b>06</b><p>Top SQL</p></div>
           <div class="glass card rpt"><b>07</b><p>SQL Tuning Recommendations</p></div>
           <div class="glass card rpt"><b>08</b><p>Index Recommendations</p></div>
@@ -990,11 +882,12 @@
         </div>
       </section>
 
-      <!-- 19 -->
-      <section class="slide" data-title="Demo Workflow">
-        <div class="kicker"><span></span> Slide 19 · Live Demo</div>
-        <h2>Live Product <em>Demonstration</em></h2>
-        <div class="grid cols-4" style="flex:1; margin-top:8px;">
+      <!-- 10 Demo Workflow + Scenario -->
+      <section class="slide" data-title="Live Demo and Scenario">
+        <div class="kicker"><span></span> Slide 10 · Live Demonstration</div>
+        <h2>Demo Workflow &amp; <em>Example DBA Scenario</em></h2>
+        <div class="goal"><b>Problem statement:</b> “The application team reports that the database was slow between 10:00 AM and 11:00 AM.”</div>
+        <div class="grid cols-4 fill">
           <div class="glass step-card"><div class="num">01</div><div><b>Open AI DBA Assistant</b><span>Launch the platform</span></div></div>
           <div class="glass step-card"><div class="num">02</div><div><b>Select AWR Analyzer</b><span>Choose the analysis path</span></div></div>
           <div class="glass step-card"><div class="num">03</div><div><b>Upload AWR Report</b><span>Oracle AWR HTML</span></div></div>
@@ -1008,17 +901,10 @@
           <div class="glass step-card"><div class="num">11</div><div><b>Recommendations</b><span>DBA next actions</span></div></div>
           <div class="glass step-card"><div class="num">12</div><div><b>Generate Report</b><span>PDF performance report</span></div></div>
         </div>
-      </section>
-
-      <!-- 20 -->
-      <section class="slide" data-title="Demo Scenario">
-        <div class="kicker"><span></span> Slide 20 · Scenario</div>
-        <h2>Example DBA <em>Scenario</em></h2>
-        <div class="goal" style="margin-bottom:14px;"><b>Problem statement:</b> “The application team reports that the database was slow between 10:00 AM and 11:00 AM.”</div>
         <div class="compare">
           <div class="glass card">
             <h3>Traditional approach</h3>
-            <p style="margin-bottom:10px; color:var(--muted);">DBA manually investigates:</p>
+            <p style="margin-bottom:8px; color:var(--muted);">DBA manually investigates:</p>
             <div class="wrap">
               <span class="pill">AWR</span><span class="pill">CPU</span><span class="pill">I/O</span>
               <span class="pill">Wait events</span><span class="pill">SQL</span>
@@ -1027,31 +913,27 @@
           </div>
           <div class="glass card">
             <h3>AI DBA Assistant</h3>
-            <p style="margin-bottom:10px; color:var(--muted);">Upload AWR. The system identifies:</p>
-            <ul>
-              <li class="check">Database health</li>
-              <li class="check">Primary bottleneck</li>
-              <li class="check">Significant wait events</li>
-              <li class="check">Top SQL</li>
-              <li class="check">Potential causes</li>
-              <li class="check">Recommended investigation</li>
-            </ul>
+            <p style="margin-bottom:8px; color:var(--muted);">Upload AWR. The system identifies:</p>
+            <div class="wrap">
+              <span class="pill">Database health</span><span class="pill">Primary bottleneck</span>
+              <span class="pill">Significant wait events</span><span class="pill">Top SQL</span>
+              <span class="pill">Potential causes</span><span class="pill">Recommended investigation</span>
+            </div>
           </div>
         </div>
-        <div class="goal" style="margin-top:14px;"><b>Result:</b> Faster path from symptom → investigation → action.</div>
+        <div class="goal"><b>Result:</b> Faster path from symptom → investigation → action.</div>
       </section>
 
-      <!-- 21 -->
-      <section class="slide" data-title="What Makes It Different?">
-        <div class="kicker"><span></span> Slide 21 · Differentiation</div>
-        <h2>Why <em>AI DBA Assistant</em>?</h2>
-        <div class="compare" style="flex:1;">
+      <!-- 11 Differentiation + Copilot -->
+      <section class="slide" data-title="Why It Is Different">
+        <div class="kicker"><span></span> Slide 11 · Differentiator</div>
+        <h2>Why AI DBA Assistant = <em>DBA Copilot</em></h2>
+        <p class="lede">The platform is designed to assist DBAs throughout the performance investigation lifecycle.</p>
+        <div class="grid cols-2eq fill">
           <div class="glass card">
             <h3>Traditional monitoring tools</h3>
-            <p class="quote" style="font-size:22px;">Primarily answer: “What is happening?”</p>
-          </div>
-          <div class="glass card">
-            <h3>AI DBA Assistant attempts to answer</h3>
+            <p class="quote">Primarily answer: “What is happening?”</p>
+            <h3 style="margin-top:8px;">AI DBA Assistant attempts to answer</h3>
             <ul>
               <li class="check">What is happening?</li>
               <li class="check">Why might it be happening?</li>
@@ -1059,38 +941,25 @@
               <li class="check">Which SQL deserves attention?</li>
               <li class="check">What action should the DBA consider?</li>
             </ul>
+            <div class="goal" style="margin-top:8px;"><b>Key differentiator:</b> Performance data + DBA intelligence + AI-assisted recommendations.</div>
+          </div>
+          <div class="grid" style="grid-template-rows:1fr 1fr 1fr; gap:10px;">
+            <div class="glass card"><h3>DBA</h3><p>Experience + Judgment + Production Knowledge</p></div>
+            <div class="glass card"><h3>AI</h3><p>Pattern Recognition + Correlation + Summarization + Recommendations</p></div>
+            <div class="glass card">
+              <h3>Together</h3>
+              <p class="quote">Faster performance investigation</p>
+              <div class="goal" style="margin-top:8px;"><b>Final point:</b> AI does not replace the DBA. AI helps the DBA make faster, better-informed decisions.</div>
+            </div>
           </div>
         </div>
-        <div class="goal" style="margin-top:14px;"><b>Key differentiator:</b> Performance data + DBA intelligence + AI-assisted recommendations.</div>
       </section>
 
-      <!-- 22 -->
-      <section class="slide" data-title="AI as a DBA Copilot">
-        <div class="kicker"><span></span> Slide 22 · Copilot</div>
-        <h2>AI DBA Assistant = <em>DBA Copilot</em></h2>
-        <p class="lede">The platform is designed to assist DBAs throughout the performance investigation lifecycle.</p>
-        <div class="grid cols-3" style="flex:1;">
-          <div class="glass card">
-            <h3>DBA</h3>
-            <p>Experience + Judgment + Production Knowledge</p>
-          </div>
-          <div class="glass card">
-            <h3>AI</h3>
-            <p>Pattern Recognition + Correlation + Summarization + Recommendations</p>
-          </div>
-          <div class="glass card">
-            <h3>Together</h3>
-            <p class="quote" style="font-size:22px;">Faster performance investigation</p>
-          </div>
-        </div>
-        <div class="goal" style="margin-top:14px;"><b>Final point:</b> AI does not replace the DBA. AI helps the DBA make faster, better-informed decisions.</div>
-      </section>
-
-      <!-- 23 -->
+      <!-- 12 Roadmap -->
       <section class="slide" data-title="Future Roadmap">
-        <div class="kicker"><span></span> Slide 23 · Roadmap</div>
+        <div class="kicker"><span></span> Slide 12 · Roadmap</div>
         <h2>Future <em>Enhancements</em></h2>
-        <div class="grid cols-3" style="flex:1;">
+        <div class="grid cols-3 fill">
           <div class="glass card">
             <h3>Phase 1 — Current</h3>
             <ul>
@@ -1130,30 +999,10 @@
         </div>
       </section>
 
-      <!-- 24 -->
-      <section class="slide" data-title="Natural Language DBA">
-        <div class="kicker"><span></span> Slide 24 · Natural Language</div>
-        <h2>The Future: <em>Ask Your Database</em></h2>
-        <div class="grid cols-2" style="flex:1;">
-          <div class="glass chat">
-            <div class="bubble q">Why was the database slow yesterday?</div>
-            <div class="bubble a">The primary contributor was I/O contention. Three SQL statements accounted for a significant portion of DB Time and physical reads. SQL ID XYZ is the highest-impact statement and should be investigated first.</div>
-          </div>
-          <div class="glass card">
-            <h3>AI DBA Assistant analyzes</h3>
-            <div class="wrap" style="margin-top:8px;">
-              <span class="pill">AWR</span><span class="pill">SQL</span><span class="pill">Wait Events</span>
-              <span class="pill">CPU</span><span class="pill">I/O</span><span class="pill">Database workload</span>
-            </div>
-            <div class="goal" style="margin-top:18px;">Natural language becomes the interface. AWR, SQL, and wait data become the evidence.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 25 -->
-      <section class="slide" data-title="Enterprise Vision">
-        <div class="kicker"><span></span> Slide 25 · Vision</div>
-        <h2>From AWR Analyzer → <em>AI DBA Platform</em></h2>
+      <!-- 13 NL + Vision + Value -->
+      <section class="slide" data-title="Vision and Business Value">
+        <div class="kicker"><span></span> Slide 13 · Vision &amp; Value</div>
+        <h2>Ask Your Database · Enterprise Vision · <em>Business Value</em></h2>
         <div class="timeline">
           <div class="glass tl"><b>Today</b><span>AWR Analysis</span></div>
           <div class="arrow">→</div>
@@ -1161,78 +1010,73 @@
           <div class="arrow">→</div>
           <div class="glass tl"><b>Future</b><span>Autonomous DBA Copilot</span></div>
         </div>
-        <div class="glass card">
-          <h3>Capabilities could include</h3>
-          <div class="wrap" style="margin-top:8px;">
-            <span class="pill">Performance monitoring</span>
-            <span class="pill">Incident detection</span>
-            <span class="pill">Root-cause analysis</span>
-            <span class="pill">SQL optimization</span>
-            <span class="pill">Capacity planning</span>
-            <span class="pill">Predictive analytics</span>
-            <span class="pill">Knowledge management</span>
-            <span class="pill">Natural-language interaction</span>
+        <div class="grid cols-2eq fill">
+          <div class="glass chat">
+            <div class="bubble q">Why was the database slow yesterday?</div>
+            <div class="bubble a">The primary contributor was I/O contention. Three SQL statements accounted for a significant portion of DB Time and physical reads. SQL ID XYZ is the highest-impact statement and should be investigated first.</div>
+            <div class="wrap">
+              <span class="pill">AWR</span><span class="pill">SQL</span><span class="pill">Wait Events</span>
+              <span class="pill">CPU</span><span class="pill">I/O</span><span class="pill">Database workload</span>
+            </div>
+          </div>
+          <div class="grid" style="grid-template-rows:auto 1fr; gap:10px;">
+            <div class="glass card">
+              <h3>Capabilities could include</h3>
+              <div class="wrap">
+                <span class="pill">Performance monitoring</span>
+                <span class="pill">Incident detection</span>
+                <span class="pill">Root-cause analysis</span>
+                <span class="pill">SQL optimization</span>
+                <span class="pill">Capacity planning</span>
+                <span class="pill">Predictive analytics</span>
+                <span class="pill">Knowledge management</span>
+                <span class="pill">Natural-language interaction</span>
+              </div>
+            </div>
+            <div class="grid cols-3">
+              <div class="glass card"><h3>Reduce investigation time</h3><p>Automate repetitive analysis.</p></div>
+              <div class="glass card"><h3>Improve response time</h3><p>Identify important performance indicators faster.</p></div>
+              <div class="glass card"><h3>Standardize analysis</h3><p>Create a consistent performance-analysis methodology.</p></div>
+              <div class="glass card"><h3>Improve knowledge sharing</h3><p>Convert DBA expertise into reusable analysis rules and recommendations.</p></div>
+              <div class="glass card"><h3>Enable AI adoption</h3><p>Introduce practical AI capabilities into the database engineering environment.</p></div>
+              <div class="glass card"><h3>Better decisions</h3><p>Give DBAs evidence, priority, and a clear next action.</p></div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 26 -->
-      <section class="slide" data-title="Business Value">
-        <div class="kicker"><span></span> Slide 26 · Business Value</div>
-        <h2>Business <em>Value</em></h2>
-        <div class="grid cols-3" style="flex:1;">
-          <div class="glass card"><h3>Reduce DBA investigation time</h3><p>Automate repetitive analysis.</p></div>
-          <div class="glass card"><h3>Improve response time</h3><p>Identify important performance indicators faster.</p></div>
-          <div class="glass card"><h3>Standardize analysis</h3><p>Create a consistent performance-analysis methodology.</p></div>
-          <div class="glass card"><h3>Improve knowledge sharing</h3><p>Convert DBA expertise into reusable analysis rules and recommendations.</p></div>
-          <div class="glass card"><h3>Enable AI adoption</h3><p>Introduce practical AI capabilities into the database engineering environment.</p></div>
-          <div class="glass card"><h3>Better decisions</h3><p>Give DBAs evidence, priority, and a clear next action.</p></div>
-        </div>
-      </section>
-
-      <!-- 27 -->
-      <section class="slide" data-title="Key Takeaways">
-        <div class="kicker"><span></span> Slide 27 · Takeaways</div>
-        <h2>One platform to <em>turn data into action</em></h2>
-        <div class="flow" style="margin: 8px 0 18px;">
+      <!-- 14 Takeaways + Thank You -->
+      <section class="slide" data-title="Takeaways and Thank You">
+        <div class="kicker"><span></span> Slide 14 · Close</div>
+        <h2>Key Takeaways &amp; <em>Thank You</em></h2>
+        <div class="flow">
           <div class="glass step">Analyze<br/><small>Oracle AWR Reports</small></div>
           <div class="arrow">→</div>
-          <div class="glass step">Understand<br/><small>Health & Workload</small></div>
+          <div class="glass step">Understand<br/><small>Health &amp; Workload</small></div>
           <div class="arrow">→</div>
-          <div class="glass step">Identify<br/><small>Bottlenecks & SQL</small></div>
+          <div class="glass step">Identify<br/><small>Bottlenecks &amp; SQL</small></div>
           <div class="arrow">→</div>
           <div class="glass step">Explain<br/><small>Potential Issues</small></div>
           <div class="arrow">→</div>
           <div class="glass step">Recommend<br/><small>DBA Actions</small></div>
           <div class="arrow">→</div>
-          <div class="glass step">Report<br/><small>Executive & Technical</small></div>
+          <div class="glass step">Report<br/><small>Executive &amp; Technical</small></div>
         </div>
-        <div class="glass card" style="text-align:center; padding:28px;">
-          <p class="quote">“Turn database performance data into actionable DBA intelligence.”</p>
-        </div>
-      </section>
-
-      <!-- 28 -->
-      <section class="slide" data-title="Thank You">
-        <div class="title-slide">
-          <div class="hero-copy">
-            <div class="kicker"><span></span> Slide 28</div>
-            <h2>Thank <em>You</em></h2>
-            <p class="tagline">AI DBA Assistant</p>
-            <p class="subtag">Intelligent Oracle Database Performance Analysis & Tuning</p>
-            <div class="presenter glass">
-              <small style="color:var(--cyan); letter-spacing:.12em; text-transform:uppercase; font-size:11px;">Presented by</small>
-              <strong>Pradarshan</strong>
-              <span>Oracle DBA @ AbbVie Inc.<br/>Product Architect & Developer — AI DBA Assistant</span>
-            </div>
-            <div class="goal" style="margin-top:18px; max-width:460px;"><b>Questions & Discussion</b></div>
+        <div class="grid cols-2eq fill">
+          <div class="glass card" style="justify-content:center;">
+            <p class="quote">“Turn database performance data into actionable DBA intelligence.”</p>
+            <div class="goal" style="margin-top:14px;"><b>Questions &amp; Discussion</b></div>
           </div>
-          <div class="hero-visual">
-            <img src="assets/banner.png" alt="AI DBA Assistant platform visual" />
+          <div class="presenter glass" style="margin-top:0; max-width:none;">
+            <small style="color:var(--cyan); letter-spacing:.12em; text-transform:uppercase; font-size:11px;">Presented by</small>
+            <strong>Pradarshan</strong>
+            <span>Oracle DBA @ AbbVie Inc.<br/>Product Architect &amp; Developer — AI DBA Assistant</span>
+            <p class="subtag" style="margin-top:12px; display:block;">Intelligent Oracle Database Performance Analysis &amp; Tuning</p>
           </div>
         </div>
       </section>
     </main>
+
 
     <footer class="bottombar">
       <div class="hint">← → or Space to navigate · O overview · F fullscreen · ? help</div>
